@@ -65,8 +65,8 @@ void run_benchmark(Function && f, int thread_count, char const * const logger)
 
 void print_usage()
 {
-    char const * const executable = "nano_vs_spdlog_vs_g3log_vs_reckless";
-    printf("Usage \n1. %s nanolog\n2. %s spdlog\n3. %s g3log\n4. %s reckless\n", executable, executable, executable, executable);
+    char const * const executable = "nano_vs_g3log";
+    printf("Usage \n1. %s nanolog\n2. %s g3log\n3. %s g3logstream\n4. %s\n", executable, executable, executable, executable);
 }
 
 int main(int argc, char * argv[])
