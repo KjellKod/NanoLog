@@ -1,0 +1,39 @@
+
+Thread count: 1
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+       11|       11|       12|       23|       27|     2056|10.972020|
+
+Thread count: 2
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        6|        6|        7|       10|       11|      550| 5.888700|
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        6|        6|       11|       12|       15|      757| 6.422730|
+
+Thread count: 3
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        6|        6|        7|       11|       13|     1208| 6.144010|
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        6|        7|        7|       11|       13|     1093| 6.260660|
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        6|        7|        9|       12|       16|      544| 6.419300|
+
+Thread count: 4
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        6|        6|        7|        9|       11|     1849| 5.699020|
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        6|        6|        7|        8|       11|     1161| 5.702160|
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        6|        7|        7|        8|       10|     1484| 6.172990|
+queuenado percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        6|        7|        7|        9|       11|      842| 6.215550|
+Number of received entries: 1000000
