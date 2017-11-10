@@ -54,7 +54,7 @@ namespace
 	char buffer[32];
 	strftime(buffer, 32, "%Y-%m-%d %T.", gmtime);
 	char microseconds[7];
-	sprintf(microseconds, "%06lu", timestamp % 1000000);
+	sprintf(microseconds, "%06llu", timestamp % 1000000);
 	os << '[' << buffer << microseconds << ']';
     }
 
@@ -597,7 +597,7 @@ namespace nanolog
 
     private:
 	uint32_t m_file_number = 0;
-	uint32_t m_bytes_written = 0;
+	std::streamoff m_bytes_written = 0;
 	uint32_t const m_log_file_roll_size_bytes;
 	std::string const m_name;
 	std::unique_ptr < std::ofstream > m_os;
@@ -607,26 +607,26 @@ namespace nanolog
     {
     public:
 	NanoLogger(NonGuaranteedLogger ngl, std::string const & log_directory, std::string const & log_file_name, uint32_t log_file_roll_size_mb)
-	    : m_disabled(1)
+	    : m_state(State::INIT)
 	    , m_buffer_base(new RingBuffer(std::max(1u, ngl.ring_buffer_size_mb) * 1024 * 4))
 	    , m_file_writer(log_directory, log_file_name, std::max(1u, log_file_roll_size_mb))
 	    , m_thread(&NanoLogger::pop, this)
 	{
-	    m_disabled.store(0, std::memory_order_release);
+	    m_state.store(State::READY, std::memory_order_release);
 	}
 
 	NanoLogger(GuaranteedLogger gl, std::string const & log_directory, std::string const & log_file_name, uint32_t log_file_roll_size_mb)
-	    : m_disabled(1)
+	    : m_state(State::INIT)
 	    , m_buffer_base(new QueueBuffer())
 	    , m_file_writer(log_directory, log_file_name, std::max(1u, log_file_roll_size_mb))
 	    , m_thread(&NanoLogger::pop, this)
 	{
-	    m_disabled.store(0, std::memory_order_release);
+	    m_state.store(State::READY, std::memory_order_release);
 	}
 
 	~NanoLogger()
 	{
-	    m_disabled.store(1);
+	    m_state.store(State::SHUTDOWN);
 	    m_thread.join();
 	}
 
@@ -638,12 +638,12 @@ namespace nanolog
 	void pop()
 	{
 	    // Wait for constructor to complete and pull all stores done there to this thread / core.
-	    while (m_disabled.load(std::memory_order_acquire))
+	    while (m_state.load(std::memory_order_acquire) == State::INIT)
 		std::this_thread::sleep_for(std::chrono::microseconds(50));
 	    
 	    NanoLogLine logline(LogLevel::INFO, nullptr, nullptr, 0);
 
-	    while (!m_disabled.load())
+	    while (m_state.load() == State::READY)
 	    {
 		if (m_buffer_base->try_pop(logline))
 		    m_file_writer.write(logline);
@@ -659,7 +659,14 @@ namespace nanolog
 	}
 	
     private:
-	std::atomic < unsigned int > m_disabled;
+	enum class State
+	{
+		INIT,
+		READY,
+		SHUTDOWN
+	};
+
+	std::atomic < State > m_state;
 	std::unique_ptr < BufferBase > m_buffer_base;
 	FileWriter m_file_writer;
 	std::thread m_thread;
