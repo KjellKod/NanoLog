@@ -1,0 +1,38 @@
+
+Thread count: 1
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        6|      400| 0.422000|
+
+Thread count: 2
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        4|      272| 0.436030|
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        4|      286| 0.438380|
+
+Thread count: 3
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        4|      240| 0.403200|
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        4|      242| 0.404380|
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        3|      233| 0.407540|
+
+Thread count: 4
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        5|      313| 0.454350|
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        5|      289| 0.454850|
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        4|      313| 0.461650|
+nanolog_guaranteed percentile latency numbers in microseconds
+     50th|     75th|     90th|     99th|   99.9th|    Worst|  Average|
+        0|        1|        1|        2|        5|      315| 0.457690|
